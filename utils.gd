@@ -14,7 +14,7 @@ static func create_wall(x,y,w,h) -> StaticBody2D:
 	return wall
 
 
-static func create_all_walls(node:Node, a=0, b=100, c=200):
+static func create_all_walls(node:Node, a=1, b=100, c=0):
 	# params: node=self, a=inside thickness, b=outside thickness, c=left margin
 	var size = node.get_viewport().get_visible_rect().size
 	# Top, Left, Bottom, Right
@@ -36,9 +36,10 @@ static func rand_pos(vw_size:Vector2) -> Vector2:
 static func rand_vel(speed=20) -> Vector2:
 	return Vector2(speed,0).rotated(randf_range(0,TAU))
 
-static func create_skid_loader(node, pos):
+static func create_skid_loader(node, pos=null):
 	var mag = SkidLoaderScene.instantiate()
-	mag.position = pos
+	if pos != null:
+		mag.position = pos
 	node.add_child(mag)
 
 
