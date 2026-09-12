@@ -8,25 +8,21 @@ class_name Main
 
 func _ready() -> void:
 	world = $World
-	Utils.create_all_walls(self)
-	Utils.create_skid_loader(self)
-	Utils.dump_physics_stuff(world.get_world_2d().get_space())
 
 func _process(delta: float) -> void:
 	pass
 
 
 func _input(event:InputEvent):
-	if not event is InputEventMouseButton: return
-	print(event.position.x)
-
-
+	if event is InputEventMouseButton: 
+		pass
+	if event is InputEventKey:
+		var c = event.as_text_keycode()
+		pass
+		
 func _physics_process(delta):
 	pass
 	
-func vw_size() -> Vector2:
-	return get_viewport().get_visible_rect().size
-
 
 func query_by_pos(pos: Vector2) -> RigidBody2D:
 	var p = PhysicsPointQueryParameters2D.new()

@@ -1,7 +1,5 @@
 class_name Utils
 
-const SkidLoaderScene = preload("res://skid_loader.tscn")
-
 
 static func create_wall(x,y,w,h) -> StaticBody2D:
 	var wall = StaticBody2D.new()
@@ -35,12 +33,6 @@ static func rand_pos(vw_size:Vector2) -> Vector2:
 
 static func rand_vel(speed=20) -> Vector2:
 	return Vector2(speed,0).rotated(randf_range(0,TAU))
-
-static func create_skid_loader(node, pos=null):
-	var mag = SkidLoaderScene.instantiate()
-	if pos != null:
-		mag.position = pos
-	node.add_child(mag)
 
 
 static func dump_physics_stuff(space):
