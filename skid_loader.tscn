@@ -3,11 +3,11 @@
 [ext_resource type="Script" uid="uid://d2j0ga3jlpb37" path="res://skid_loader.gd" id="1_cqg03"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dc7t5"]
-size = Vector2(78, 25.5)
+size = Vector2(80, 32)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dc7t5"]
-radius = 6.0
-height = 68.0
+radius = 8.0
+height = 64.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dc7t5"]
 
@@ -23,39 +23,43 @@ metadata/_edit_group_ = true
 [node name="ChassisShape" type="CollisionShape2D" parent="Chassis" unique_id=489448021]
 shape = SubResource("RectangleShape2D_dc7t5")
 
-[node name="Hinge1" type="PinJoint2D" parent="." unique_id=471654594]
-position = Vector2(38, 9)
-node_a = NodePath("../Chassis")
-node_b = NodePath("../Arm1")
-
-[node name="Arm1" type="RigidBody2D" parent="." unique_id=2103137158]
-position = Vector2(38, -20)
+[node name="Arm1" type="RigidBody2D" parent="Chassis" unique_id=2103137158]
+position = Vector2(40, -24)
 collision_layer = 2
-metadata/_edit_group_ = true
 
-[node name="Arm1Shape" type="CollisionShape2D" parent="Arm1" unique_id=48176855]
+[node name="Hinge" type="PinJoint2D" parent="Chassis/Arm1" unique_id=471654594]
+position = Vector2(0, 24)
+node_a = NodePath("../..")
+node_b = NodePath("..")
+
+[node name="Drive" type="PinJoint2D" parent="Chassis/Arm1/Hinge" unique_id=836093437]
+position = Vector2(0, -56)
+node_a = NodePath("../../..")
+node_b = NodePath("../..")
+
+[node name="Shape" type="CollisionShape2D" parent="Chassis/Arm1" unique_id=48176855]
 shape = SubResource("CapsuleShape2D_dc7t5")
 
-[node name="FrontWheel" type="RigidBody2D" parent="." unique_id=1360496796]
+[node name="FrontWheel" type="RigidBody2D" parent="Chassis" unique_id=1360496796]
 position = Vector2(29, 17)
 collision_layer = 2
 metadata/_edit_group_ = true
 
-[node name="FrontAxle" type="PinJoint2D" parent="FrontWheel" unique_id=284703857]
-node_a = NodePath("../../Chassis")
+[node name="FrontAxle" type="PinJoint2D" parent="Chassis/FrontWheel" unique_id=284703857]
+node_a = NodePath("../..")
 node_b = NodePath("..")
 
-[node name="FrontWheelShape" type="CollisionShape2D" parent="FrontWheel" unique_id=1688844545]
+[node name="FrontWheelShape" type="CollisionShape2D" parent="Chassis/FrontWheel" unique_id=1688844545]
 shape = SubResource("CircleShape2D_dc7t5")
 
-[node name="RearWheel" type="RigidBody2D" parent="." unique_id=534365657]
+[node name="RearWheel" type="RigidBody2D" parent="Chassis" unique_id=534365657]
 position = Vector2(-21, 17)
 collision_layer = 2
 metadata/_edit_group_ = true
 
-[node name="RearAxle" type="PinJoint2D" parent="RearWheel" unique_id=828954569]
-node_a = NodePath("../../Chassis")
+[node name="RearAxle" type="PinJoint2D" parent="Chassis/RearWheel" unique_id=828954569]
+node_a = NodePath("../..")
 node_b = NodePath("..")
 
-[node name="RearWheelShape" type="CollisionShape2D" parent="RearWheel" unique_id=1424547563]
+[node name="RearWheelShape" type="CollisionShape2D" parent="Chassis/RearWheel" unique_id=1424547563]
 shape = SubResource("CircleShape2D_dmlp4")

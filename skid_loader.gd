@@ -24,21 +24,18 @@ static func create(pos=null) -> SkidLoader:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	#$Hinge1.angular_limit_enabled = true
-	$Hinge1.angular_limit_lower = 0
-	$Hinge1.angular_limit_upper = 0.001
-	$Hinge1.motor_enabled = true
-	$Hinge1.motor_target_velocity = -10
-	$Hinge1.softness = 0
+	pass
 
-func drive_hinge(hinge:PinJoint2D, new_angle:float):
-	var body_a = $Chassis
-	var body_b = $Arm1
-	var angle = body_b.global_rotation - body_a.global_rotation
-	print('angle ',angle, '  new angle ',new_angle)
-	if angle != new_angle:
-		hinge.motor_target_velocity = (new_angle - angle) * 100
-		body_a.sleeping = false
+
+func drive_hinge(arm:RigidBody2D, new_angle:float):
+	var h = arm.get_node("Hinge")
+	var d = h.get_node("Drive")
+	var r = Vector2.from_angle(new_angle + PI/2)
+	print(d.position, ' ',new_angle,arm.position)
+	d.position = r * 56
+	arm.position = r * 24 + Vector2(40,0)
+	arm.rotation = new_angle + PI/2
+	
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -56,6 +53,6 @@ func _physics_process(delta: float) -> void:
 	var b = 10000
 	if drive:
 		print(drive)
-		$RearWheel.apply_torque(drive * b)
-		$FrontWheel.apply_torque(drive * b)
-	drive_hinge($Hinge1, angle1)
+		$Chassis/RearWheel.apply_torque(drive * b)
+		$Chassis/FrontWheel.apply_torque(drive * b)
+	drive_hinge($Chassis/Arm1, angle1)
