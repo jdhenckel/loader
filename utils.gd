@@ -12,6 +12,17 @@ static func create_wall(x,y,w,h) -> StaticBody2D:
 	return wall
 
 
+static func create_brick(x,y,w=20,h=15) -> StaticBody2D:
+	var ball = RapierRigidBody2D.new()
+	var shape = CollisionShape2D.new()
+	var rect = RectangleShape2D.new()
+	rect.size = Vector2(w,h)
+	shape.shape = rect
+	ball.add_child(shape)
+	ball.position = Vector2(x,y)
+	return ball
+
+
 static func create_all_walls(node:Node, a=1, b=100, c=0):
 	# params: node=self, a=inside thickness, b=outside thickness, c=left margin
 	var size = node.get_viewport().get_visible_rect().size
