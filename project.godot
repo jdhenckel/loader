@@ -26,6 +26,7 @@ project/assembly_name="loader"
 
 [physics]
 
+2d/physics_engine="Rapier2D"
 3d/physics_engine="Jolt Physics"
 2d/default_gravity=828.2020000000002
 

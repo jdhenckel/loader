@@ -8,3 +8,17 @@ script = ExtResource("1_0xm2m")
 
 [node name="World" type="Node2D" parent="." unique_id=422836096]
 script = ExtResource("2_h2yge")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=354466540]
+offset_right = 264.0
+offset_bottom = 179.0
+
+[node name="Label" type="Label" parent="HBoxContainer" unique_id=1594060756]
+layout_mode = 2
+text = "  Skid Loader, by John Henckel 2026
+  Keys:
+  * A/S drive wheels
+  * U/J move arm 1
+  * I/K move arm 2
+  * O/L move bucket
+"

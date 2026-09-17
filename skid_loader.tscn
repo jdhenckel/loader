@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://cqcxkbj25eis4"]
 
 [ext_resource type="Script" uid="uid://d2j0ga3jlpb37" path="res://skid_loader.gd" id="1_cqg03"]
+[ext_resource type="Script" uid="uid://unwhnooi7g2c" path="res://addons/godot-rapier2d/custom_nodes/rapier_rigid_body_2d.gd" id="2_3rmt4"]
+[ext_resource type="Script" uid="uid://bv2bc4lt5v7hu" path="res://addons/godot-rapier2d/custom_nodes/rapier_pin_joint_2d.gd" id="2_h3jgb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dc7t5"]
 size = Vector2(80, 32)
@@ -16,33 +18,39 @@ height = 64.0
 [node name="SkidLoader" type="Node2D" unique_id=1483740645]
 script = ExtResource("1_cqg03")
 
-[node name="Chassis" type="RigidBody2D" parent="." unique_id=1199821100]
+[node name="Chassis" type="RigidBody2D" parent="." unique_id=1524726684]
 collision_layer = 2
+script = ExtResource("2_3rmt4")
+metadata/_custom_type_script = "uid://unwhnooi7g2c"
 metadata/_edit_group_ = true
 
 [node name="ChassisShape" type="CollisionShape2D" parent="Chassis" unique_id=489448021]
 shape = SubResource("RectangleShape2D_dc7t5")
 
-[node name="Arm1" type="RigidBody2D" parent="Chassis" unique_id=2103137158]
+[node name="Arm1" type="RigidBody2D" parent="Chassis" unique_id=357520268]
 position = Vector2(40, -24)
 collision_layer = 2
+script = ExtResource("2_3rmt4")
+metadata/_custom_type_script = "uid://unwhnooi7g2c"
 
-[node name="Hinge" type="PinJoint2D" parent="Chassis/Arm1" unique_id=471654594]
+[node name="Hinge" type="PinJoint2D" parent="Chassis/Arm1" unique_id=2007164095]
 position = Vector2(0, 24)
 node_a = NodePath("../..")
 node_b = NodePath("..")
-
-[node name="Drive" type="PinJoint2D" parent="Chassis/Arm1/Hinge" unique_id=836093437]
-position = Vector2(0, -56)
-node_a = NodePath("../../..")
-node_b = NodePath("../..")
+script = ExtResource("2_h3jgb")
+motor_position_enabled = true
+motor_position_stiffness = 1234567.0
+motor_position_damping = 100.0
+metadata/_custom_type_script = "uid://bv2bc4lt5v7hu"
 
 [node name="Shape" type="CollisionShape2D" parent="Chassis/Arm1" unique_id=48176855]
 shape = SubResource("CapsuleShape2D_dc7t5")
 
-[node name="FrontWheel" type="RigidBody2D" parent="Chassis" unique_id=1360496796]
+[node name="FrontWheel" type="RigidBody2D" parent="Chassis" unique_id=1248082444]
 position = Vector2(29, 17)
 collision_layer = 2
+script = ExtResource("2_3rmt4")
+metadata/_custom_type_script = "uid://unwhnooi7g2c"
 metadata/_edit_group_ = true
 
 [node name="FrontAxle" type="PinJoint2D" parent="Chassis/FrontWheel" unique_id=284703857]
@@ -52,9 +60,11 @@ node_b = NodePath("..")
 [node name="FrontWheelShape" type="CollisionShape2D" parent="Chassis/FrontWheel" unique_id=1688844545]
 shape = SubResource("CircleShape2D_dc7t5")
 
-[node name="RearWheel" type="RigidBody2D" parent="Chassis" unique_id=534365657]
+[node name="RearWheel" type="RigidBody2D" parent="Chassis" unique_id=1795157231]
 position = Vector2(-21, 17)
 collision_layer = 2
+script = ExtResource("2_3rmt4")
+metadata/_custom_type_script = "uid://unwhnooi7g2c"
 metadata/_edit_group_ = true
 
 [node name="RearAxle" type="PinJoint2D" parent="Chassis/RearWheel" unique_id=828954569]
