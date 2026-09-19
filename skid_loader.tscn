@@ -27,6 +27,7 @@ metadata/_edit_group_ = true
 collision_layer = 2
 mass = 5.0
 script = ExtResource("2_3rmt4")
+massless = true
 metadata/_custom_type_script = "uid://unwhnooi7g2c"
 metadata/_edit_group_ = true
 
@@ -37,6 +38,7 @@ shape = SubResource("RectangleShape2D_dc7t5")
 position = Vector2(40, -24)
 collision_layer = 4
 script = ExtResource("2_3rmt4")
+massless = true
 metadata/_custom_type_script = "uid://unwhnooi7g2c"
 metadata/_edit_group_ = true
 
@@ -45,6 +47,7 @@ position = Vector2(0, 24)
 node_a = NodePath("../..")
 node_b = NodePath("..")
 script = ExtResource("2_h3jgb")
+joint_type = 1
 motor_position_enabled = true
 motor_position_stiffness = 1234567.0
 motor_position_damping = 100.0
@@ -57,6 +60,7 @@ shape = SubResource("CapsuleShape2D_dc7t5")
 collision_layer = 8
 mass = 0.7
 script = ExtResource("2_3rmt4")
+massless = true
 metadata/_custom_type_script = "uid://unwhnooi7g2c"
 metadata/_edit_group_ = true
 
@@ -65,6 +69,7 @@ position = Vector2(0, -28)
 node_a = NodePath("../..")
 node_b = NodePath("..")
 script = ExtResource("2_h3jgb")
+joint_type = 1
 motor_position_enabled = true
 motor_position_stiffness = 1234567.0
 motor_position_damping = 100.0
@@ -79,6 +84,7 @@ collision_layer = 16
 collision_mask = 7
 mass = 0.2
 script = ExtResource("2_3rmt4")
+massless = true
 metadata/_custom_type_script = "uid://unwhnooi7g2c"
 metadata/_edit_group_ = true
 
@@ -87,6 +93,7 @@ position = Vector2(-17, 0)
 node_a = NodePath("../..")
 node_b = NodePath("..")
 script = ExtResource("2_h3jgb")
+joint_type = 1
 motor_position_enabled = true
 motor_position_stiffness = 1234567.0
 motor_position_damping = 100.0
@@ -101,12 +108,16 @@ position = Vector2(29, 17)
 collision_layer = 32
 collision_mask = 57
 script = ExtResource("2_3rmt4")
+massless = true
 metadata/_custom_type_script = "uid://unwhnooi7g2c"
 metadata/_edit_group_ = true
 
-[node name="FrontAxle" type="PinJoint2D" parent="Chassis/FrontWheel" unique_id=284703857]
+[node name="FrontAxle" type="PinJoint2D" parent="Chassis/FrontWheel" unique_id=243030497]
 node_a = NodePath("../..")
 node_b = NodePath("..")
+script = ExtResource("2_h3jgb")
+joint_type = 1
+metadata/_custom_type_script = "uid://bv2bc4lt5v7hu"
 
 [node name="FrontWheelShape" type="CollisionShape2D" parent="Chassis/FrontWheel" unique_id=1688844545]
 shape = SubResource("CircleShape2D_dc7t5")
@@ -116,12 +127,16 @@ position = Vector2(-21, 17)
 collision_layer = 32
 collision_mask = 57
 script = ExtResource("2_3rmt4")
+massless = true
 metadata/_custom_type_script = "uid://unwhnooi7g2c"
 metadata/_edit_group_ = true
 
-[node name="RearAxle" type="PinJoint2D" parent="Chassis/RearWheel" unique_id=828954569]
+[node name="RearAxle" type="PinJoint2D" parent="Chassis/RearWheel" unique_id=281581634]
 node_a = NodePath("../..")
 node_b = NodePath("..")
+script = ExtResource("2_h3jgb")
+joint_type = 1
+metadata/_custom_type_script = "uid://bv2bc4lt5v7hu"
 
 [node name="RearWheelShape" type="CollisionShape2D" parent="Chassis/RearWheel" unique_id=1424547563]
 shape = SubResource("CircleShape2D_dmlp4")
