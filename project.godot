@@ -26,9 +26,11 @@ project/assembly_name="loader"
 
 [physics]
 
-2d/physics_engine="Rapier2D"
+2d/physics_engine="GodotPhysics2D"
 3d/physics_engine="Jolt Physics"
-2d/default_gravity=828.2020000000002
+2d/default_gravity=0.0
+2d/default_linear_damp=0.0
+2d/default_angular_damp=0.0
 
 [rendering]
 

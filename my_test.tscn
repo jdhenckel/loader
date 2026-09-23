@@ -1,0 +1,86 @@
+[gd_scene format=3 uid="uid://bmdwmpm0jjght"]
+
+[ext_resource type="Script" uid="uid://cjnfebi50xp5d" path="res://my_test.gd" id="1_hhgf5"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dc7t5"]
+radius = 8.0
+height = 48.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xvvuj"]
+radius = 8.0
+height = 48.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dmlp4"]
+radius = 8.0
+height = 48.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dc7t5"]
+size = Vector2(18, 18)
+
+[node name="MyTest" type="Node2D" unique_id=364556700]
+position = Vector2(32, 32)
+script = ExtResource("1_hhgf5")
+
+[node name="BodyA" type="RigidBody2D" parent="." unique_id=694396801]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BodyA" unique_id=67223843]
+shape = SubResource("CapsuleShape2D_dc7t5")
+
+[node name="BodyB" type="RigidBody2D" parent="." unique_id=1784496236]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BodyB" unique_id=81745976]
+position = Vector2(0, 32)
+shape = SubResource("CapsuleShape2D_xvvuj")
+
+[node name="BodyC" type="RigidBody2D" parent="." unique_id=429880105]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BodyC" unique_id=897369800]
+position = Vector2(0, 64)
+shape = SubResource("CapsuleShape2D_dmlp4")
+
+[node name="Pin1" type="PinJoint2D" parent="." unique_id=691937546]
+position = Vector2(0, 16)
+node_a = NodePath("../BodyA")
+node_b = NodePath("../BodyB")
+
+[node name="Pin2" type="PinJoint2D" parent="." unique_id=1439277498]
+position = Vector2(0, 48)
+node_a = NodePath("../BodyC")
+node_b = NodePath("../BodyB")
+
+[node name="Chassis" type="RigidBody2D" parent="." unique_id=1609866024]
+position = Vector2(-32, -32)
+collision_layer = 2
+mass = 3.0
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Chassis" unique_id=1745372770]
+polygon = PackedVector2Array(-32, -16, -32, 8, -24, 16, 16, 16, 32, 24, 40, 16, 24, -16)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Chassis/CollisionShape2D" unique_id=1856617915]
+position = Vector2(0, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chassis/CollisionShape2D/StaticBody2D" unique_id=99201349]
+shape = SubResource("RectangleShape2D_dc7t5")
+
+[node name="Pin0" type="PinJoint2D" parent="." unique_id=1000333709]
+position = Vector2(0, -16)
+node_a = NodePath("../Chassis")
+node_b = NodePath("../BodyA")
+
+[node name="Drive1" type="PinJoint2D" parent="." unique_id=1682979506]
+node_a = NodePath("../Chassis")
+node_b = NodePath("../BodyA")
+
+[node name="Drive2" type="PinJoint2D" parent="." unique_id=1097240522]
+position = Vector2(0, 32)
+node_a = NodePath("../Chassis")
+node_b = NodePath("../BodyB")
+
+[node name="Drive3" type="PinJoint2D" parent="." unique_id=546763015]
+position = Vector2(0, 64)
+node_a = NodePath("../Chassis")
+node_b = NodePath("../BodyC")

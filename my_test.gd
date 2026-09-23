@@ -1,7 +1,7 @@
 extends Node2D
-class_name SkidLoader
+class_name MyTest
 
-const SkidLoaderScene = preload("res://skid_loader.tscn")
+const MyTestScene = preload("res://my_test.tscn")
 
 #========== Local Data =========
 var drive:float = 0
@@ -10,8 +10,8 @@ var angle2:float = 0
 var angle3:float = 0
 var jointlen:float = 24
 
-static func create(pos=null) -> SkidLoader:
-	var skid = SkidLoaderScene.instantiate()
+static func create(pos=null) -> MyTest:
+	var skid = MyTestScene.instantiate()
 	if pos != null:skid.position = pos
 	else: skid.position = Vector2(500,500)
 	return skid
@@ -19,16 +19,17 @@ static func create(pos=null) -> SkidLoader:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	drive_hinge($Chassis/Arm1, angle1)
+	pass
 
 
 func drive_hinge(arm:RigidBody2D, new_angle:float):
-	var h : RapierPinJoint2D = arm.get_node("Hinge")
+	var h : PinJoint2D = arm.get_node("Hinge")
+	#h.set_notify_transform()
 	h.motor_position_target_angle = new_angle
 	#print(new_angle)
 
 func fix_hinge(arm:RigidBody2D, y:float):
-	var h : RapierPinJoint2D = arm.get_node("Hinge")
+	var h : PinJoint2D = arm.get_node("Hinge")
 	h.transform.origin.y = y
 	h.node_a = h.node_a
 	h.node_b = h.node_b
@@ -54,11 +55,4 @@ func input_key(ch: String, pressed:bool):
 
 
 func _physics_process(delta: float) -> void:
-	var b = 10000
-	if drive:
-		$Chassis/RearWheel.apply_torque(drive * b)
-		$Chassis/FrontWheel.apply_torque(drive * b)
-	drive_hinge($Chassis/Arm1, angle1)
-	fix_hinge($Chassis/Arm1, jointlen)
-	drive_hinge($Chassis/Arm1/Arm2, angle2)
-	drive_hinge($Chassis/Arm1/Arm2/Bucket, angle3)
+	pass

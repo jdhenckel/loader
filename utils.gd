@@ -23,6 +23,15 @@ static func create_brick(x,y,w=20,h=15) -> StaticBody2D:
 	return ball
 
 
+static func create_ball(x,y,r=20) -> RigidBody2D:
+	var ball = RigidBody2D.new()
+	var shape = CollisionShape2D.new()
+	shape.shape = CircleShape2D.new()
+	ball.add_child(shape)
+	ball.position = Vector2(x,y)
+	return ball
+
+
 static func create_all_walls(node:Node, a=1, b=100, c=0):
 	# params: node=self, a=inside thickness, b=outside thickness, c=left margin
 	var size = node.get_viewport().get_visible_rect().size
