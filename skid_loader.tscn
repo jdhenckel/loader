@@ -33,6 +33,8 @@ metadata/_edit_group_ = true
 [node name="ChassisShape" type="CollisionShape2D" parent="Chassis" unique_id=489448021]
 shape = SubResource("RectangleShape2D_dc7t5")
 
+[node name="Drive" type="StaticBody2D" parent="Chassis" unique_id=471267618]
+
 [node name="Arm1" type="RigidBody2D" parent="Chassis" unique_id=357520268]
 position = Vector2(40, -24)
 collision_layer = 4
@@ -53,6 +55,13 @@ metadata/_custom_type_script = "uid://bv2bc4lt5v7hu"
 [node name="Shape" type="CollisionShape2D" parent="Chassis/Arm1" unique_id=48176855]
 shape = SubResource("CapsuleShape2D_dc7t5")
 
+[node name="Drive" type="StaticBody2D" parent="Chassis/Arm1" unique_id=1124866054]
+
+[node name="Pin" type="PinJoint2D" parent="Chassis/Arm1" unique_id=1289801718]
+position = Vector2(-40, 24)
+node_a = NodePath("../Drive")
+node_b = NodePath("..")
+
 [node name="Arm2" type="RigidBody2D" parent="Chassis/Arm1" unique_id=769146753]
 collision_layer = 8
 mass = 0.7
@@ -72,6 +81,8 @@ metadata/_custom_type_script = "uid://bv2bc4lt5v7hu"
 
 [node name="Shape" type="CollisionShape2D" parent="Chassis/Arm1/Arm2" unique_id=1106100507]
 shape = SubResource("CapsuleShape2D_dmlp4")
+
+[node name="Drive" type="StaticBody2D" parent="Chassis/Arm1/Arm2" unique_id=194797845]
 
 [node name="Bucket" type="RigidBody2D" parent="Chassis/Arm1/Arm2" unique_id=1270789410]
 position = Vector2(20, 31)

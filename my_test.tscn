@@ -15,7 +15,7 @@ radius = 8.0
 height = 48.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dc7t5"]
-size = Vector2(18, 18)
+size = Vector2(9, 9)
 
 [node name="MyTest" type="Node2D" unique_id=364556700]
 position = Vector2(32, 32)
@@ -55,13 +55,13 @@ node_b = NodePath("../BodyB")
 position = Vector2(-32, -32)
 collision_layer = 2
 mass = 3.0
-metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="Chassis" unique_id=1745372770]
 polygon = PackedVector2Array(-32, -16, -32, 8, -24, 16, 16, 16, 32, 24, 40, 16, 24, -16)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Chassis/CollisionShape2D" unique_id=1856617915]
-position = Vector2(0, 32)
+position = Vector2(32, 32)
+metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Chassis/CollisionShape2D/StaticBody2D" unique_id=99201349]
 shape = SubResource("RectangleShape2D_dc7t5")
