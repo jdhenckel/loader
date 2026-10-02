@@ -5,9 +5,9 @@ const SkidLoaderScene = preload("res://skid_loader.tscn")
 
 #========== Local Data =========
 var drive:float = 0
-var angle1:= Utils.SmoothVar.new(.005)
-var angle2:= Utils.SmoothVar.new(.005)
-var angle3:= Utils.SmoothVar.new(.005)
+var angle1:= Utils.SmoothVar.new(.005, .02)
+var angle2:= Utils.SmoothVar.new(.005, .02)
+var angle3:= Utils.SmoothVar.new(.005, .02)
 
 
 static func create(pos=null) -> SkidLoader:
@@ -44,22 +44,40 @@ func _process(delta: float) -> void:
 var key = Utils.KeyState.new()
 
 func input_key(ch: String, pressed:bool):
-	key.set_value(ch, pressed)
+	key.set_key(ch, pressed)
 	if not pressed: return
 	if ch=='Q': get_tree().quit()
 	if ch=='P': angle1.maxv *= 2
 	if ch=='Semicolon': angle1.maxv /= 2
-	print(angle1.x, ' ', angle1.tx, ' ', angle1.acc, ' ', angle1.maxv, ' ch=',ch)
+	print(key.up('P'),key.down('P'),key.pressed('P'),key.released('P'))
+	
+	print(angle1.x, ' ', angle1.tx, ' ',
+		angle1.v, ' ', angle1.tv, ' ', 
+		angle1.acc, ' ', angle1.maxv, ' ', angle1.stopped, ' ',
+		'ch=',ch)
 
 
 func handle_keys():
-	drive = -1 if key['A'] else 1 if key['S'] else 0
-	if key['J']: if angle1.tx<3: angle1.tx += .1
-	if key['U']: if angle1.tx>-1: angle1.tx -= .1
-	if key['K']: if angle2.tx<0: angle2.tx += .1
-	if key['I']: if angle2.tx>-6: angle2.tx -= .1
-	if key['L']: if angle3.tx<3.4: angle3.tx += .1
-	if key['O']: if angle3.tx>-1.1: angle3.tx -= .1
+	drive = -1 if key.down('A') else 1 if key.down('S') else 0
+	if key.pressed('J'): angle1.spin(1)
+	if key.pressed('U'): angle1.spin(-1)
+	if key.pressed('K'): angle2.spin(1)
+	if key.pressed('I'): angle2.spin(-1)
+	if key.pressed('L'): angle3.spin(1)
+	if key.pressed('O'): angle3.spin(-1)
+	if key.released('J'): angle1.stop_soon()
+	if key.released('U'): angle1.stop_soon()
+	if key.released('K'): angle2.stop_soon()
+	if key.released('I'): angle2.stop_soon()
+	if key.released('L'): angle3.stop_soon()
+	if key.released('O'): angle3.stop_soon()
+	#if key.down('J'): if angle1.tx<3: angle1.tx += .1
+	#if key.down('U'): if angle1.tx>-1: angle1.tx -= .1
+	#if key.down('K'): if angle2.tx<0: angle2.tx += .1
+	#if key.down('I'): if angle2.tx>-6: angle2.tx -= .1
+	#if key.down('L'): if angle3.tx<3.4: angle3.tx += .1
+	#if key.down('O'): if angle3.tx>-1.1: angle3.tx -= .1
+	key.clear()
 
 
 func _physics_process(delta: float) -> void:
