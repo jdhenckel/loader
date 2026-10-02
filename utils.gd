@@ -1,5 +1,27 @@
 class_name Utils
 
+# The purpose of this is to drive the variable x to the target tx over time.
+# the acc is the rate of acceration, it must be positive
+class SmoothVar:
+	var tx:float = 0
+	var x:float = 0
+	var v:float = 0
+	var acc:float = 1
+	var maxv:float = 10
+	func _init(a):
+		acc = a
+	func step():
+		x += v/2
+		var m = x + v + abs(v/2)*v/acc
+		v = clamp(v + clamp(tx - m, -acc, acc), -maxv, maxv)
+		x += v/2
+
+class KeyState:
+	var data = {}
+	func _get(key):
+		return data.get(key, false)
+	func set_value(key, value):
+		data[key] = value
 
 static func create_wall(x,y,w,h) -> StaticBody2D:
 	var wall = StaticBody2D.new()
