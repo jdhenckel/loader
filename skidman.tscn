@@ -2,17 +2,17 @@
 
 [ext_resource type="Script" uid="uid://bdsbx5p8utvmp" path="res://skidman.gd" id="1_wjr5c"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xvvuj"]
-radius = 7.9986725
-height = 79.986664
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dc7t5"]
+radius = 8.0
+height = 80.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dmlp4"]
 radius = 8.0
 height = 79.99999
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dc7t5"]
-radius = 8.0
-height = 80.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xvvuj"]
+radius = 7.9986725
+height = 79.986664
 
 [node name="Skidman" type="Node" unique_id=1752960197]
 script = ExtResource("1_wjr5c")
@@ -28,6 +28,10 @@ node_b = NodePath("../Arm1")
 collision_layer = 4
 collision_mask = 0
 
+[node name="Shape" type="CollisionShape2D" parent="Chassis/Arm1" unique_id=1920732480]
+position = Vector2(0, -32)
+shape = SubResource("CapsuleShape2D_dc7t5")
+
 [node name="Hinge" type="PinJoint2D" parent="Chassis/Arm1" unique_id=173007818]
 position = Vector2(0, -64)
 node_a = NodePath("..")
@@ -37,6 +41,11 @@ node_b = NodePath("../Arm2")
 collision_layer = 8
 collision_mask = 0
 
+[node name="Shape" type="CollisionShape2D" parent="Chassis/Arm1/Arm2" unique_id=1209559101]
+position = Vector2(32, -64)
+rotation = -1.5707964
+shape = SubResource("CapsuleShape2D_dmlp4")
+
 [node name="Hinge" type="PinJoint2D" parent="Chassis/Arm1/Arm2" unique_id=1649238296]
 position = Vector2(64, -64)
 node_a = NodePath("..")
@@ -44,21 +53,11 @@ node_b = NodePath("../Arm3")
 
 [node name="Arm3" type="RigidBody2D" parent="Chassis/Arm1/Arm2" unique_id=1818966812]
 collision_layer = 16
-collision_mask = 0
 
 [node name="Shape" type="CollisionShape2D" parent="Chassis/Arm1/Arm2/Arm3" unique_id=2147327121]
 position = Vector2(64.00001, -32.000004)
 rotation = -3.1415927
 shape = SubResource("CapsuleShape2D_xvvuj")
-
-[node name="Shape" type="CollisionShape2D" parent="Chassis/Arm1/Arm2" unique_id=1209559101]
-position = Vector2(32, -64)
-rotation = -1.5707964
-shape = SubResource("CapsuleShape2D_dmlp4")
-
-[node name="Shape" type="CollisionShape2D" parent="Chassis/Arm1" unique_id=1920732480]
-position = Vector2(0, -32)
-shape = SubResource("CapsuleShape2D_dc7t5")
 
 [node name="Shape" type="CollisionPolygon2D" parent="Chassis" unique_id=1554079598]
 position = Vector2(-40, 40)

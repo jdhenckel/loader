@@ -5,9 +5,9 @@ const SkidLoaderScene = preload("res://skid_loader.tscn")
 
 #========== Local Data =========
 var drive:float = 0
-var angle1:= Utils.SmoothVar.new(.005, .02)
-var angle2:= Utils.SmoothVar.new(.005, .02)
-var angle3:= Utils.SmoothVar.new(.005, .02)
+var angle1:= Utils.SmoothVar.new(.001, .02).set_limits(-1,3)
+var angle2:= Utils.SmoothVar.new(.003, .02).set_limits(-6,.01)
+var angle3:= Utils.SmoothVar.new(.005, .02).set_limits(-1.1,3.4)
 
 
 static func create(pos=null) -> SkidLoader:

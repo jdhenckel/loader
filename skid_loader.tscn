@@ -55,6 +55,7 @@ shape = SubResource("CapsuleShape2D_dc7t5")
 [node name="Stick" type="RigidBody2D" parent="Chassis/Boom" unique_id=769146753]
 collision_layer = 8
 mass = 0.7
+gravity_scale = 0.5
 script = ExtResource("2_3rmt4")
 metadata/_custom_type_script = "uid://unwhnooi7g2c"
 metadata/_edit_group_ = true
@@ -74,8 +75,8 @@ shape = SubResource("CapsuleShape2D_dmlp4")
 [node name="Bucket" type="RigidBody2D" parent="Chassis/Boom/Stick" unique_id=1270789410]
 position = Vector2(20, 31)
 collision_layer = 16
-collision_mask = 7
 mass = 0.2
+gravity_scale = 0.5
 script = ExtResource("2_3rmt4")
 metadata/_custom_type_script = "uid://unwhnooi7g2c"
 metadata/_edit_group_ = true
@@ -96,7 +97,6 @@ polygon = PackedVector2Array(5, 0, 8, 2, -31, 2, -31, -3)
 [node name="FrontWheel" type="RigidBody2D" parent="Chassis" unique_id=1248082444]
 position = Vector2(29, 17)
 collision_layer = 32
-collision_mask = 57
 script = ExtResource("2_3rmt4")
 metadata/_custom_type_script = "uid://unwhnooi7g2c"
 metadata/_edit_group_ = true
@@ -111,7 +111,6 @@ shape = SubResource("CircleShape2D_dc7t5")
 [node name="RearWheel" type="RigidBody2D" parent="Chassis" unique_id=1795157231]
 position = Vector2(-21, 17)
 collision_layer = 32
-collision_mask = 57
 script = ExtResource("2_3rmt4")
 metadata/_custom_type_script = "uid://unwhnooi7g2c"
 metadata/_edit_group_ = true

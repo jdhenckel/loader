@@ -8,14 +8,19 @@ class SmoothVar:
 	var stopped:bool = false
 	var x:float = 0
 	var v:float = 0
-	var acc:float = 1
-	var maxv:float = 10
-	func _init(max_a=1,max_v=10,target_x=0,target_v=0):
-		acc = max_a
-		maxv = max_v
-		tx = target_x
-		tv = target_v
-		stopped = (target_v==0)
+	var xlo:float = 1e38
+	var xhi:float = -1e38
+	var acc:float = .005
+	var maxv:float = .02
+	func _init(max_a=null,max_v=null):
+		if max_a!=null: acc = max_a
+		if max_v!=null: maxv = max_v
+		stopped = true
+		
+	func set_limits(lo, hi) -> SmoothVar:
+		xlo = lo
+		xhi = hi
+		return self
 		
 	func stop_at(target_x):
 		stopped = true
@@ -38,11 +43,6 @@ class SmoothVar:
 	func spin(dir=1):
 		set_speed(maxv*dir)
 		
-	func step_old():
-		x += v/2
-		var m = x + v + abs(v/2)*v/acc
-		v = clamp(v + clamp(tx - m, -acc, acc), -maxv, maxv)
-		x += v/2
 		
 	func step():
 		x += v/2
@@ -50,8 +50,7 @@ class SmoothVar:
 		if stopped:	dv = tx - (x + v + abs(v/2)*v/acc)
 		else:		dv = tv - v
 		v = clamp(v + clamp(dv, -acc, acc), -maxv, maxv)
-		x += v/2
-
+		x = clamp(x + v/2, xlo, xhi)
 
 class KeyState:
 	# This stores a dictionary of int for each key. The int cycles thru 
