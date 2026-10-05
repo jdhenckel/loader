@@ -20,9 +20,11 @@ class SmoothVar:
 	func set_limits(lo, hi) -> SmoothVar:
 		xlo = lo
 		xhi = hi
+		x = clamp(x, xlo, xhi)
 		return self
 		
 	func stop_at(target_x):
+		#print(stopped,' ',tx,' ',x)
 		stopped = true
 		tx = target_x
 		
@@ -47,28 +49,41 @@ class SmoothVar:
 	func step():
 		x += v/2
 		var dv = 0
-		if stopped:	dv = tx - (x + v + abs(v/2)*v/acc)
-		else:		dv = tv - v
+		if stopped: dv = tx - (x + v + abs(v/2)*v/acc)
+		else: dv = tv - v
 		v = clamp(v + clamp(dv, -acc, acc), -maxv, maxv)
-		x = clamp(x + v/2, xlo, xhi)
+		var xx = x + v/2
+		x = clamp(xx, xlo, xhi)
+		var c = v + abs(v/2)*v/acc
+		if v < 0 and xx + c <= xlo: stop_at(xlo)
+		if v > 0 and xx + c >= xhi: stop_at(xhi)
+		#if xx < xlo or xx > xhi: stop()
+
 
 class KeyState:
 	# This stores a dictionary of int for each key. The int cycles thru 
 	# 3 -> 2 -> 1 -> 0.  each key is two bits 1=recent, 2=pressed
 	# Thus, 3=recently pressed, 2=down, 1=recently released, 0=up
-	# You must call clear() once per frame, after doing your actions
+	# NOTE pressed() or released() will return true ONLY ONCE per action
 	var data = {}
 	func down(key): return data.get(key, 0) > 1
 	func up(key): return data.get(key, 0) <= 1
-	func pressed(key): return data.get(key, 0) == 3
-	func released(key): return data.get(key, 0) == 1
-
+	func pressed(key) -> bool:
+		var v:int = data.get(key, 0)
+		if v == 3: data[key] = 2
+		return v == 3
+	func released(key) -> bool:
+		var v:int = data.get(key, 0)
+		if v == 1: data[key] = 0
+		return v == 1
 	# value true=down, false=up
-	func set_key(key, value:bool):
-		data[key] = 3 if value else 1
-	
-	# this function clears all the recent flags
-	func clear():
+	func action(key, value:bool):
+		var v1 = data.get(key, -999)
+		var v2 = 3 if value else 1
+		if (v1 | 1) != v2:
+			data[key] = v2
+			print('action ',key,' ','down' if v2==3 else 'up')
+	func clear_recent_flags():
 		for k in data:
 			data[k] = data[k] & 2
 
